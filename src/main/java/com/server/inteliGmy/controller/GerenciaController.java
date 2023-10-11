@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/owner")
@@ -18,20 +19,16 @@ public class GerenciaController {
     @Autowired
     private GerenciaService gerenciaService;
 
-    @GetMapping()
-    public String teste() {
-        return "Teste";
-    }
-
     @GetMapping("/{uid}")
     public ResponseEntity<Gerencia> getAGerenciaById(@PathVariable String uid) {
         return ResponseEntity.ok().body(gerenciaService.getGerencia(uid));
     }
 
     @PutMapping("/{uid}")
-    public ResponseEntity<Gerencia> updateAdmin(@PathVariable String uid, @RequestBody Gerencia adminDTO) {
+    public ResponseEntity<Void> updateAdmin(@PathVariable String uid, @RequestBody Gerencia adminDTO) {
         Gerencia a = gerenciaService.updateEvent(uid, adminDTO);
-        return ResponseEntity.ok().body(a);
+        return ResponseEntity.noContent().build();
+
     }
 
     @PostMapping()
@@ -48,4 +45,10 @@ public class GerenciaController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aux.getId()).toUri();
         return ResponseEntity.created(uri).body(aux);
     }
+
+    @GetMapping("/{uid}/instrutores")
+    public ResponseEntity<List<Instrutor>> getInstrutoresByGerente(@PathVariable String uid) {
+        return ResponseEntity.ok().body(gerenciaService.getInstrutores(uid));
+    }
+
 }

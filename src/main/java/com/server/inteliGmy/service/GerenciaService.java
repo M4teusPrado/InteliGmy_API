@@ -10,6 +10,8 @@ import com.server.inteliGmy.repository.InstrutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GerenciaService {
 
@@ -59,5 +61,9 @@ public class GerenciaService {
                 .setDisabled(false);
 
         return FirebaseAuth.getInstance().createUser(request);
+    }
+
+    public List<Instrutor> getInstrutores(String uidGerente) {
+        return  getGerencia(uidGerente).getInstrutors();
     }
 }
