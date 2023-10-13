@@ -8,9 +8,12 @@ import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.GerenciaRepository;
 import com.server.inteliGmy.repository.InstrutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GerenciaService {
@@ -22,7 +25,10 @@ public class GerenciaService {
     private InstrutorRepository instrutorRepository;
 
     public Gerencia getGerencia(String uid) {
-        return gerenciaRepository.findByUid(uid);
+        System.out.println("UID Recebido: " + uid);
+        Optional<Gerencia> gerente = gerenciaRepository.findByUid(uid);
+        gerente.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
+        return gerente.get();
     }
 
     public Gerencia updateEvent(String uid, Gerencia gerenciaDTO) {
@@ -64,6 +70,6 @@ public class GerenciaService {
     }
 
     public List<Instrutor> getInstrutores(String uidGerente) {
-        return  getGerencia(uidGerente).getInstrutores();
+        return getGerencia(uidGerente).getInstrutores();
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 
@@ -15,5 +16,5 @@ public interface GerenciaRepository extends JpaRepository<Gerencia, Long> {
             " SELECT a FROM Gerencia a " +
                     " WHERE a.uid = :uid"
     )
-    Gerencia findByUid(String uid);
+    Optional<Gerencia> findByUid(String uid);
 }

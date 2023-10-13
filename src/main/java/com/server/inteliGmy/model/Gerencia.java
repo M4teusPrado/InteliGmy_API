@@ -18,8 +18,10 @@ public class Gerencia extends BaseUser {
     private String cnpj;
     private String senha;
 
-    @Setter(AccessLevel.NONE)
-    private Nivel nivel = Nivel.GERENTE;
+    @Override
+    public void setNivel(Nivel nivel) {
+        super.setNivel(Nivel.GERENTE);
+    }
 
     @OneToMany
     private List<Instrutor> instrutores;

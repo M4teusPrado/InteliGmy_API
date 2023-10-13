@@ -19,7 +19,6 @@ public class AlunoController {
     @Autowired
     private AlunoService alunoService;
 
-
     @PostMapping()
     public ResponseEntity<Aluno> createAluno(@RequestBody Aluno aluno) {
 
