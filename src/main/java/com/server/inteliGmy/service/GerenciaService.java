@@ -64,6 +64,6 @@ public class GerenciaService {
     }
 
     public List<Instrutor> getInstrutores(String uidGerente) {
-        return  getGerencia(uidGerente).getInstrutors();
+        return  getGerencia(uidGerente).getInstrutores();
     }
 }

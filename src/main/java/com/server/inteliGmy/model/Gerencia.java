@@ -1,32 +1,30 @@
 package com.server.inteliGmy.model;
 
 
-import jakarta.persistence.*;
+import com.server.inteliGmy.model.Enuns.Nivel;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Setter;
 
 import java.util.List;
 
 @Data
 @Entity
-public class Gerencia {
+public class Gerencia extends BaseUser {
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String uid;
-    private String nome;
     private String nomeAcademia;
-    private String email;
     private String cnpj;
     private String senha;
 
-    @OneToMany
-    private List<Instrutor> instrutors;
+    @Setter(AccessLevel.NONE)
+    private Nivel nivel = Nivel.GERENTE;
 
+    @OneToMany
+    private List<Instrutor> instrutores;
 
     public void addInstrutor(Instrutor instrutor) {
-
-        this.instrutors.add(instrutor);
+        this.instrutores.add(instrutor);
     }
-
 }

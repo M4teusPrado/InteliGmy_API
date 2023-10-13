@@ -33,6 +33,7 @@ public class GerenciaController {
 
     @PostMapping()
     public ResponseEntity<Gerencia> insertAdmin(@RequestBody Gerencia gerencia) {
+
         Gerencia aux = gerenciaService.insertGerencia(gerencia);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aux.getId()).toUri();
         return ResponseEntity.created(uri).body(aux);
