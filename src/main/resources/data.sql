@@ -8,8 +8,6 @@ INSERT INTO GERENCIA (ID, NOME_ACADEMIA, CNPJ, SENHA)
 VALUES
   (1, 'Nome da Academia', '12345678901234', 'senha123');
 
-
-
 -- INSERIR DADOS NA TABELA BASE_USER PARA OS INSTRUTORES
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
 VALUES
@@ -39,3 +37,23 @@ VALUES
 
 -- INSERIR DADOS NA TABELA ALUNO
 INSERT INTO ALUNO (ID) VALUES (5);
+
+
+
+-- INSERIR DADOS NA TABELA BASE_USER PARA A GERENCIA
+INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
+VALUES
+  ('c7PtkoKRVpfUWcRVPgigIy3IV262', 'Manager Name', 'manager@example.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV263', 'Manager Name', 'manager@example.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV264', 'Manager Name', 'manager@example.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV265', 'Manager Name', 'manager@example.com', 0);
+
+-- INSERIR DADOS NA TABELA GERENCIA
+INSERT INTO GERENCIA (ID, NOME_ACADEMIA, CNPJ, SENHA)
+VALUES
+  (6, 'Gym Name', '12345678901234', 'password123'),
+  (7, 'Fitness Center', '98765432109876', 'securepass456'),
+  (8, 'Health Club', '45678901234567', 'strongpass789'),
+  (9, 'Sports Complex', '78901234567890', 'safeandstrong987');
+
+

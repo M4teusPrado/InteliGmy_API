@@ -3,6 +3,7 @@ package com.server.inteliGmy.service;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
+import com.server.inteliGmy.model.Aluno;
 import com.server.inteliGmy.model.Gerencia;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.GerenciaRepository;
@@ -20,6 +21,9 @@ public class GerenciaService {
 
     @Autowired
     private GerenciaRepository gerenciaRepository;
+
+    @Autowired
+    private AlunoService alunoService;
 
     @Autowired
     private InstrutorRepository instrutorRepository;
@@ -71,5 +75,18 @@ public class GerenciaService {
 
     public List<Instrutor> getInstrutores(String uidGerente) {
         return getGerencia(uidGerente).getInstrutores();
+    }
+
+    public List<Gerencia> getGerentes() {
+        return gerenciaRepository.findAll();
+    }
+
+    public void b(String uid, String uidAluno) {
+        Gerencia gerente = getGerencia(uid);
+        Aluno aluno = alunoService.getAlunoById(uidAluno);
+        gerente.addAluno(aluno);
+
+        gerenciaRepository.save(gerente);
+
     }
 }

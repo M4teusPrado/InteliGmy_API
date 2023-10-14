@@ -24,6 +24,12 @@ public class GerenciaController {
         return ResponseEntity.ok().body(gerenciaService.getGerencia(uid));
     }
 
+    @GetMapping()
+    public ResponseEntity<List<Gerencia>> getInstrutores() {
+        return ResponseEntity.ok().body(gerenciaService.getGerentes());
+    }
+
+
     @PutMapping("/{uid}")
     public ResponseEntity<Void> updateAdmin(@PathVariable String uid, @RequestBody Gerencia adminDTO) {
         Gerencia a = gerenciaService.updateEvent(uid, adminDTO);
@@ -50,6 +56,13 @@ public class GerenciaController {
     @GetMapping("/{uid}/instrutores")
     public ResponseEntity<List<Instrutor>> getInstrutoresByGerente(@PathVariable String uid) {
         return ResponseEntity.ok().body(gerenciaService.getInstrutores(uid));
+    }
+
+    @PutMapping("/{uid}/alunos/{uidAluno}")
+    public ResponseEntity<Void> a(@PathVariable String uid, @PathVariable String uidAluno) {
+        gerenciaService.b(uid, uidAluno);
+        return ResponseEntity.noContent().build();
+
     }
 
 }
