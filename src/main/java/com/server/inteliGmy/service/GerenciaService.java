@@ -7,14 +7,13 @@ import com.server.inteliGmy.model.Aluno;
 import com.server.inteliGmy.model.Gerencia;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.GerenciaRepository;
-import com.server.inteliGmy.repository.InstrutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class GerenciaService {
@@ -23,26 +22,25 @@ public class GerenciaService {
     private GerenciaRepository gerenciaRepository;
 
     @Autowired
-    private AlunoService alunoService;
+    private InstrutorService instrutorService;
 
     @Autowired
-    private InstrutorRepository instrutorRepository;
+    private AlunoService alunoService;
 
-    public Gerencia getGerencia(String uid) {
-        System.out.println("UID Recebido: " + uid);
-        Optional<Gerencia> gerente = gerenciaRepository.findByUid(uid);
-        gerente.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
-        return gerente.get();
+    public Gerencia getGerenciaById(String uid) {
+        return gerenciaRepository.findByUid(uid)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
     }
 
-    public Gerencia updateEvent(String uid, Gerencia gerenciaDTO) {
-        Gerencia gerencia = getGerencia(uid);
+    @Transactional
+    public Gerencia updateGerencia(String uid, Gerencia gerenciaDTO) {
+        Gerencia gerencia = getGerenciaById(uid);
 
         if (gerenciaDTO.getNome() != null) {
             gerencia.setNome(gerenciaDTO.getNome());
         }
 
-        return gerenciaRepository.save(gerencia);
+        return gerencia;
     }
 
     public Gerencia insertGerencia(Gerencia gerenciaDTO) {
@@ -50,15 +48,12 @@ public class GerenciaService {
     }
 
     public Instrutor insertInstrutor(String uid, Instrutor instrutor) throws FirebaseAuthException {
-        Gerencia gerencia = getGerencia(uid);
+        Gerencia gerencia = getGerenciaById(uid);
 
         instrutor.setUid(insertInstrutorFirebase(instrutor).getUid());
-
-        Instrutor savedInstrutor = instrutorRepository.save(instrutor);
+        Instrutor savedInstrutor = instrutorService.createInstrutor(instrutor);
 
         gerencia.addInstrutor(savedInstrutor);
-        gerenciaRepository.save(gerencia);
-
         return savedInstrutor;
     }
 
@@ -74,19 +69,17 @@ public class GerenciaService {
     }
 
     public List<Instrutor> getInstrutores(String uidGerente) {
-        return getGerencia(uidGerente).getInstrutores();
+        return getGerenciaById(uidGerente).getInstrutores();
     }
 
     public List<Gerencia> getGerentes() {
         return gerenciaRepository.findAll();
     }
 
-    public void b(String uid, String uidAluno) {
-        Gerencia gerente = getGerencia(uid);
+    @Transactional
+    public void associateAlunoWithGerencia(String uid, String uidAluno) {
+        Gerencia gerencia = getGerenciaById(uid);
         Aluno aluno = alunoService.getAlunoById(uidAluno);
-        gerente.addAluno(aluno);
-
-        gerenciaRepository.save(gerente);
-
+        gerencia.addAluno(aluno);
     }
 }

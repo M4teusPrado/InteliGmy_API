@@ -16,4 +16,9 @@ public class InstrutorService {
     public List<Instrutor> getInstrutores() {
         return instrutorRepository.findAll();
     }
+
+
+    public Instrutor createInstrutor(Instrutor instrutor) {
+        return instrutorRepository.save(instrutor);
+    }
 }

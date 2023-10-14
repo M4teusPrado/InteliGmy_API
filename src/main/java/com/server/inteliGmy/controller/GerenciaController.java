@@ -20,49 +20,46 @@ public class GerenciaController {
     private GerenciaService gerenciaService;
 
     @GetMapping("/{uid}")
-    public ResponseEntity<Gerencia> getAGerenciaById(@PathVariable String uid) {
-        return ResponseEntity.ok().body(gerenciaService.getGerencia(uid));
+    public ResponseEntity<Gerencia> getGerenciaById(@PathVariable String uid) {
+        Gerencia gerencia = gerenciaService.getGerenciaById(uid);
+        return ResponseEntity.ok().body(gerencia);
     }
 
     @GetMapping()
-    public ResponseEntity<List<Gerencia>> getInstrutores() {
-        return ResponseEntity.ok().body(gerenciaService.getGerentes());
+    public ResponseEntity<List<Gerencia>> getGerentes() {
+        List<Gerencia> gerentes = gerenciaService.getGerentes();
+        return ResponseEntity.ok().body(gerentes);
     }
 
-
     @PutMapping("/{uid}")
-    public ResponseEntity<Void> updateAdmin(@PathVariable String uid, @RequestBody Gerencia adminDTO) {
-        Gerencia a = gerenciaService.updateEvent(uid, adminDTO);
+    public ResponseEntity<Void> updateGerencia(@PathVariable String uid, @RequestBody Gerencia gerenciaDTO) {
+        gerenciaService.updateGerencia(uid, gerenciaDTO);
         return ResponseEntity.noContent().build();
-
     }
 
     @PostMapping()
-    public ResponseEntity<Gerencia> insertAdmin(@RequestBody Gerencia gerencia) {
-
-        Gerencia aux = gerenciaService.insertGerencia(gerencia);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aux.getId()).toUri();
-        return ResponseEntity.created(uri).body(aux);
+    public ResponseEntity<Gerencia> insertGerencia(@RequestBody Gerencia gerencia) {
+        Gerencia gerenciaInserida = gerenciaService.insertGerencia(gerencia);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(gerenciaInserida.getId()).toUri();
+        return ResponseEntity.created(uri).body(gerenciaInserida);
     }
-
 
     @PostMapping("/{uid}/instrutor")
     public ResponseEntity<Instrutor> insertInstrutor(@PathVariable String uid, @RequestBody Instrutor instrutor) throws FirebaseAuthException {
-        Instrutor aux = gerenciaService.insertInstrutor(uid, instrutor);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aux.getId()).toUri();
-        return ResponseEntity.created(uri).body(aux);
+        Instrutor instrutorInserido = gerenciaService.insertInstrutor(uid, instrutor);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(instrutorInserido.getId()).toUri();
+        return ResponseEntity.created(uri).body(instrutorInserido);
     }
 
     @GetMapping("/{uid}/instrutores")
     public ResponseEntity<List<Instrutor>> getInstrutoresByGerente(@PathVariable String uid) {
-        return ResponseEntity.ok().body(gerenciaService.getInstrutores(uid));
+        List<Instrutor> instrutores = gerenciaService.getInstrutores(uid);
+        return ResponseEntity.ok().body(instrutores);
     }
 
     @PutMapping("/{uid}/alunos/{uidAluno}")
-    public ResponseEntity<Void> a(@PathVariable String uid, @PathVariable String uidAluno) {
-        gerenciaService.b(uid, uidAluno);
+    public ResponseEntity<Void> associateAlunoWithGerencia(@PathVariable String uid, @PathVariable String uidAluno) {
+        gerenciaService.associateAlunoWithGerencia(uid, uidAluno);
         return ResponseEntity.noContent().build();
-
     }
-
 }

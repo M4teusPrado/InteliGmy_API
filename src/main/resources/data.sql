@@ -43,10 +43,10 @@ INSERT INTO ALUNO (ID) VALUES (5);
 -- INSERIR DADOS NA TABELA BASE_USER PARA A GERENCIA
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
 VALUES
-  ('c7PtkoKRVpfUWcRVPgigIy3IV262', 'Manager Name', 'manager@example.com', 0),
   ('c7PtkoKRVpfUWcRVPgigIy3IV263', 'Manager Name', 'manager@example.com', 0),
   ('c7PtkoKRVpfUWcRVPgigIy3IV264', 'Manager Name', 'manager@example.com', 0),
-  ('c7PtkoKRVpfUWcRVPgigIy3IV265', 'Manager Name', 'manager@example.com', 0);
+  ('c7PtkoKRVpfUWcRVPgigIy3IV265', 'Manager Name', 'manager@example.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV266', 'Manager Name', 'manager@example.com', 0);
 
 -- INSERIR DADOS NA TABELA GERENCIA
 INSERT INTO GERENCIA (ID, NOME_ACADEMIA, CNPJ, SENHA)

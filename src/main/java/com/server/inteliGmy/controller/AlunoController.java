@@ -16,18 +16,22 @@ public class AlunoController {
     @Autowired
     private AlunoService alunoService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<Aluno> createAluno(@RequestBody Aluno aluno) {
-
-        Aluno aux = alunoService.createAluno(aluno);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(aux.getId()).toUri();
-        return ResponseEntity.created(uri).body(aux);
+        Aluno createdAluno = alunoService.createAluno(aluno);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdAluno.getId()).toUri();
+        return ResponseEntity.created(uri).body(createdAluno);
     }
 
     @GetMapping("/{uid}")
     public ResponseEntity<Aluno> getAlunoById(@PathVariable String uid) {
-        return ResponseEntity.ok().body(alunoService.getAlunoById(uid));
+        Aluno aluno = alunoService.getAlunoById(uid);
+        return ResponseEntity.ok().body(aluno);
     }
 
-
+    @PutMapping("/{uid}")
+    public ResponseEntity<Void> updateAluno(@PathVariable String uid, @RequestBody Aluno aluno) {
+        alunoService.updateAluno(uid, aluno);
+        return ResponseEntity.noContent().build();
+    }
 }
