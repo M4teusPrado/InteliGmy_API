@@ -1,8 +1,11 @@
 package com.server.inteliGmy.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.server.inteliGmy.model.Enuns.Nivel;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
@@ -15,8 +18,12 @@ public class Gerencia extends BaseUser {
     private String nomeAcademia;
     private String cnpj;
     private String senha;
-    @OneToMany
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "gerente")
     private List<Instrutor> instrutores;
+
+    @JsonIgnore
     @OneToMany
     private List<Aluno> alunos;
 

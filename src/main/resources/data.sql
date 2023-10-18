@@ -1,59 +1,42 @@
 -- INSERIR DADOS NA TABELA BASE_USER PARA A GERENCIA
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
 VALUES
-  ('c7PtkoKRVpfUWcRVPgigIy3IV262', 'Nome da Gerência', 'email@example.com', 0);
+  ('c7PtkoKRVpfUWcRVPgigIy3IV262', 'Mateus Prado', 'mateus.silvaprado@gmail.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV263', 'José Silva', 'jose.silva@example.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV264', 'Maria Oliveira', 'maria.oliveira@example.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV265', 'Carlos Santos', 'carlos.santos@example.com', 0),
+  ('c7PtkoKRVpfUWcRVPgigIy3IV266', 'Ana Pereira', 'ana.pereira@example.com', 0);
 
 -- INSERIR DADOS NA TABELA GERENCIA
 INSERT INTO GERENCIA (ID, NOME_ACADEMIA, CNPJ, SENHA)
 VALUES
-  (1, 'Nome da Academia', '12345678901234', 'senha123');
+  (1, 'Nome da Academia', '12345678901234', 'senha123'),
+  (2, 'Gym Name', '12345678901234', 'password123'),
+  (3, 'Fitness Center', '98765432109876', 'securepass456'),
+  (4, 'Health Club', '45678901234567', 'strongpass789'),
+  (5, 'Sports Complex', '78901234567890', 'safeandstrong987');
 
 -- INSERIR DADOS NA TABELA BASE_USER PARA OS INSTRUTORES
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
 VALUES
-  ('uid_instrutor_1', 'João Silva', 'joao.silva@example.com', 1),
-  ('uid_instrutor_2', 'Maria Oliveira', 'maria.oliveira@example.com', 1),
-  ('uid_instrutor_3', 'Carlos Santos', 'carlos.santos@example.com', 1);
+  ('XvNZvA1lTuYI9MotBjIUcq2YyNc2', 'Rafael Oliveira', 'rafael@gmail.com', 1),
+  ('JgbNIl3WsmfTS1MHva5enxOwztC2', 'Paula Souza', 'paula.souza@gmail.com', 1),
+  ('bSc7d2IUT0eiZalN1PzA9RVEmSt1', 'Fernando Costa', 'fernando.costa@gmail.com', 1);
 
 -- INSERIR DADOS NA TABELA INSTRUTOR
-INSERT INTO INSTRUTOR (ID, HORARIO, SENHA_TEMPORARIA)
+INSERT INTO INSTRUTOR (ID, HORARIO, SENHA_TEMPORARIA, GERENCIA_ID)
 VALUES
-  (2, '09:00-11:00', 'senha123'),
-  (3, '14:00-16:00', 'senha456'),
-  (4, '11:00-13:00', 'senha789');
-
-
--- INSERIR NA TABELA DE RELAÇÕES GERENCIA COM INSTRUTORES
-INSERT INTO GERENCIA_INSTRUTORES (GERENCIA_ID, INSTRUTORES_ID) VALUES(1,2);
-INSERT INTO GERENCIA_INSTRUTORES (GERENCIA_ID, INSTRUTORES_ID) VALUES(1,3);
-INSERT INTO GERENCIA_INSTRUTORES (GERENCIA_ID, INSTRUTORES_ID) VALUES(1,4);
-
+  (6, '09:00-11:00', 'Mateus!@#123',1),
+  (7, '14:00-16:00', 'Mateus!@#123',2),
+  (8, '11:00-13:00', 'Mateus!@#123',2);
 
 -- INSERIR DADOS NA TABELA BASE_USER PARA O ALUNO
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
 VALUES
-  ('c7PtkoKRVpfUWcRVPgigIy3IV222', 'João Felix', 'aluno@example.com', 2);
-
+  ('qVVDeQFqlEaAnMHhWzr6WWWrnqt1', 'João Felix', 'aluno@example.com', 2);
 
 -- INSERIR DADOS NA TABELA ALUNO
-INSERT INTO ALUNO (ID) VALUES (5);
+INSERT INTO ALUNO (ID) VALUES (9);
 
-
-
--- INSERIR DADOS NA TABELA BASE_USER PARA A GERENCIA
-INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
-VALUES
-  ('c7PtkoKRVpfUWcRVPgigIy3IV263', 'Manager Name', 'manager@example.com', 0),
-  ('c7PtkoKRVpfUWcRVPgigIy3IV264', 'Manager Name', 'manager@example.com', 0),
-  ('c7PtkoKRVpfUWcRVPgigIy3IV265', 'Manager Name', 'manager@example.com', 0),
-  ('c7PtkoKRVpfUWcRVPgigIy3IV266', 'Manager Name', 'manager@example.com', 0);
-
--- INSERIR DADOS NA TABELA GERENCIA
-INSERT INTO GERENCIA (ID, NOME_ACADEMIA, CNPJ, SENHA)
-VALUES
-  (6, 'Gym Name', '12345678901234', 'password123'),
-  (7, 'Fitness Center', '98765432109876', 'securepass456'),
-  (8, 'Health Club', '45678901234567', 'strongpass789'),
-  (9, 'Sports Complex', '78901234567890', 'safeandstrong987');
-
-
+---- INSERIR NA TABELA DE RELAÇÕES ACADEMIA COM ALUNOS
+INSERT INTO GERENCIA_ALUNOS (GERENCIA_ID, ALUNOS_ID) VALUES(2,9);

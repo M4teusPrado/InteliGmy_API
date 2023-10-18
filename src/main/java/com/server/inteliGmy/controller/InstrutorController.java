@@ -1,12 +1,12 @@
 package com.server.inteliGmy.controller;
 
-import com.server.inteliGmy.model.Gerencia;
+import com.server.inteliGmy.model.Aluno;
 import com.server.inteliGmy.model.Instrutor;
-import com.server.inteliGmy.service.GerenciaService;
 import com.server.inteliGmy.service.InstrutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,4 +24,8 @@ public class InstrutorController {
         return ResponseEntity.ok().body(instrutorService.getInstrutores());
     }
 
+    @GetMapping("/{uidInstrutor}/alunos")
+    public List<Aluno> retrieveSameManagementStudents(@PathVariable String uidInstrutor) {
+        return instrutorService.findAlunosByInstrutorId(uidInstrutor);
+    }
 }
