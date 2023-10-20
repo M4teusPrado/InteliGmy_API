@@ -7,7 +7,9 @@ import com.server.inteliGmy.model.Aluno;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.InstrutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -16,6 +18,10 @@ public class InstrutorService {
 
     @Autowired
     private InstrutorRepository instrutorRepository;
+
+    public Instrutor getInstrutorById(String uid) {
+        return instrutorRepository.findByUid(uid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Gerente não encontrado"));
+    }
 
     public List<Instrutor> getInstrutores() {
         return instrutorRepository.findAll();
@@ -38,5 +44,10 @@ public class InstrutorService {
                 .setDisabled(false);
 
         return FirebaseAuth.getInstance().createUser(request);
+    }
+
+    public void deleteInstrutor(String uidInstrutor) {
+        Instrutor instrutor = getInstrutorById(uidInstrutor);
+        instrutorRepository.deleteById(instrutor.getId());
     }
 }
