@@ -48,21 +48,19 @@ public class AlunoService {
 
 
     //TODO: Criar uma consulta personalizada para simplificar este método
-    public List<Instrutor> findInstrutoressByAlunoId(String uidAluno) {
+    public List<Instrutor> getInstrutoressByAlunoId(String uidAluno) {
 
         Optional<Aluno> alunoOptional = alunoRepository.findByUid(uidAluno);
 
-        if (alunoOptional.isEmpty()) {
-            return Collections.emptyList();
+        if (alunoOptional.isPresent()) {
+            Aluno aluno = alunoOptional.get();
+            Gerencia gerencia = aluno.getGerente();
+
+            if (gerencia != null) {
+                return gerencia.getInstrutores();
+            }
         }
 
-        Aluno aluno = alunoOptional.get();
-        Gerencia gerencia = aluno.getGerente();
-
-        if (gerencia == null) {
-            return Collections.emptyList();
-        }
-
-        return gerencia.getInstrutores();
+        return Collections.emptyList();
     }
 }

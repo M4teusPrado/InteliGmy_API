@@ -38,7 +38,7 @@ public class AlunoController {
     }
 
     @GetMapping("/{uidAluno}/instrutores")
-    public List<Instrutor> obterInstrutoresDoAluno(@PathVariable String uidAluno) {
-        return alunoService.findInstrutoressByAlunoId(uidAluno);
+    public List<Instrutor> getInstrutoressByAlunoId(@PathVariable String uidAluno) {
+        return alunoService.getInstrutoressByAlunoId(uidAluno);
     }
 }
