@@ -1,6 +1,8 @@
 package com.server.inteliGmy.service;
 
 import com.server.inteliGmy.model.Aluno;
+import com.server.inteliGmy.model.Gerencia;
+import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,4 +46,23 @@ public class AlunoService {
 
     }
 
+
+    //TODO: Criar uma consulta personalizada para simplificar este método
+    public List<Instrutor> findInstrutoressByAlunoId(String uidAluno) {
+
+        Optional<Aluno> alunoOptional = alunoRepository.findByUid(uidAluno);
+
+        if (alunoOptional.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        Aluno aluno = alunoOptional.get();
+        Gerencia gerencia = aluno.getGerente();
+
+        if (gerencia == null) {
+            return Collections.emptyList();
+        }
+
+        return gerencia.getInstrutores();
+    }
 }

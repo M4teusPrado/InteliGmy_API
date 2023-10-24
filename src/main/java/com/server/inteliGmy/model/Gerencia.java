@@ -24,7 +24,7 @@ public class Gerencia extends BaseUser {
     private List<Instrutor> instrutores;
 
     @JsonIgnore
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "gerente")
     private List<Aluno> alunos;
 
     @Override
