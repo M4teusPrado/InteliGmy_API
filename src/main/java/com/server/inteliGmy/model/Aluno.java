@@ -2,11 +2,10 @@ package com.server.inteliGmy.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.server.inteliGmy.model.Enuns.Nivel;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -22,4 +21,16 @@ public class Aluno extends BaseUser {
     @JoinColumn(name = "gerencia_id")
     private Gerencia gerente;
 
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+    private List<AvaliacaoFisica> agendamentos;
+
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "id=" + getId() +
+                ", nome='" + getNome() + '\'' +
+                // Não inclua a referência ao AgendamentoAvaliacao aqui
+                '}';
+    }
 }

@@ -5,6 +5,8 @@ import com.server.inteliGmy.model.Enuns.Nivel;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Instrutor extends BaseUser {
@@ -17,8 +19,22 @@ public class Instrutor extends BaseUser {
     @JoinColumn(name = "gerencia_id")
     private Gerencia gerente;
 
+
+    @OneToMany(mappedBy = "instrutor", cascade = CascadeType.ALL)
+    private List<AvaliacaoFisica> agendamentos;
+
+
     @Override
     public void setNivel(Nivel nivel) {
         super.setNivel(Nivel.INSTRUTOR);
+    }
+
+    @Override
+    public String toString() {
+        return "Instrutor{" +
+                "id=" + getId() +
+                ", nome='" + getNome() + '\'' +
+                // Não inclua a referência ao AgendamentoAvaliacao aqui
+                '}';
     }
 }
