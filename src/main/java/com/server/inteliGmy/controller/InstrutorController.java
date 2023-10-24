@@ -31,4 +31,16 @@ public class InstrutorController {
         instrutorService.deleteInstrutor(uidInstrutor);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{uidInstrutor}")
+    public ResponseEntity<Instrutor> getInstrutorById(@PathVariable String uidInstrutor) {
+        Instrutor instrutor = instrutorService.getInstrutorById(uidInstrutor);
+        return ResponseEntity.ok().body(instrutor);
+    }
+
+    @PutMapping("/{uidInstrutor}")
+    public ResponseEntity<Void> updateInstrutor(@PathVariable String uidInstrutor, @RequestBody Instrutor instrutorDTO) {
+        instrutorService.updateInstrutor(uidInstrutor, instrutorDTO);
+        return ResponseEntity.noContent().build();
+    }
 }
