@@ -1,11 +1,14 @@
 package com.server.inteliGmy.service;
 
+import com.server.inteliGmy.DTOs.FeedbackDTO;
 import com.server.inteliGmy.DTOs.SolicitacaoChamadoDTO;
 import com.server.inteliGmy.model.Aluno;
 import com.server.inteliGmy.model.Chamado;
 import com.server.inteliGmy.model.Enuns.StatusChamados;
+import com.server.inteliGmy.model.Feedback;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.ChamadoRepository;
+import com.server.inteliGmy.repository.FeedbackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,9 @@ public class ChamadoService {
 
     @Autowired
     private ChamadoRepository chamadoRepository;
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
     @Autowired
     private InstrutorService instrutorService;
@@ -35,5 +41,19 @@ public class ChamadoService {
         chamado.setStatusChamados(StatusChamados.ABERTO);
 
         chamadoRepository.save(chamado);
+    }
+
+    public void registrarFeedback(FeedbackDTO feedbackDTO) {
+        Instrutor instrutor = instrutorService.getInstrutorById(feedbackDTO.getUidInstrutorAvaliado());
+        Aluno aluno = alunoService.getAlunoById(feedbackDTO.getUidAlunoAvaliador());
+
+        Feedback feedback = new Feedback();
+        feedback.setAlunoAvaliador(aluno);
+        feedback.setInstrutorAvaliado(instrutor);
+        feedback.setClassificacao(feedbackDTO.getClassificacao());
+        feedback.setComentario(feedbackDTO.getComentario());
+        feedback.setDataCriacao(LocalDate.now());
+
+        feedbackRepository.save(feedback);
     }
 }
