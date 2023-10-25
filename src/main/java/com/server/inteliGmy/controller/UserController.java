@@ -1,8 +1,10 @@
 package com.server.inteliGmy.controller;
 
 
-import com.server.inteliGmy.model.BaseUser;
+import com.server.inteliGmy.DTOs.BaseUserDTO;
+import com.server.inteliGmy.model.Enuns.Nivel;
 import com.server.inteliGmy.repository.UserRepository;
+import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +20,14 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/{uid}")
-    public ResponseEntity<BaseUser> getUserById(@PathVariable String uid) {
-        return ResponseEntity.ok().body(userRepository.findByUid(uid));
+    public ResponseEntity<BaseUserDTO> getUserById(@PathVariable String uid) {
+
+        Tuple result = userRepository.findBaseUserDTOByUid(uid);
+        BaseUserDTO baseUserDTO = new BaseUserDTO();
+        baseUserDTO.setUid(result.get("uid", String.class));
+        baseUserDTO.setNivel(result.get("nivel", Nivel.class));
+
+        return ResponseEntity.ok().body(baseUserDTO);
     }
 
 
