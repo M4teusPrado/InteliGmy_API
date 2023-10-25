@@ -1,5 +1,6 @@
 package com.server.inteliGmy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.server.inteliGmy.model.Enuns.Nivel;
 import jakarta.persistence.*;
@@ -21,6 +22,7 @@ public class Aluno extends BaseUser {
     @JoinColumn(name = "gerencia_id")
     private Gerencia gerente;
 
+    @JsonIgnore()
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
     private List<AvaliacaoFisica> agendamentos;
 
