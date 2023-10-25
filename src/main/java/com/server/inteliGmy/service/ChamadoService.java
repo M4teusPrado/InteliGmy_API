@@ -1,0 +1,39 @@
+package com.server.inteliGmy.service;
+
+import com.server.inteliGmy.DTOs.SolicitacaoChamadoDTO;
+import com.server.inteliGmy.model.Aluno;
+import com.server.inteliGmy.model.Chamado;
+import com.server.inteliGmy.model.Enuns.StatusChamados;
+import com.server.inteliGmy.model.Instrutor;
+import com.server.inteliGmy.repository.ChamadoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+
+@Service
+public class ChamadoService {
+
+    @Autowired
+    private ChamadoRepository chamadoRepository;
+
+    @Autowired
+    private InstrutorService instrutorService;
+
+    @Autowired
+    private AlunoService alunoService;
+
+
+    public void solicitarChamado(SolicitacaoChamadoDTO chamadoDTO) {
+        Instrutor instrutor = instrutorService.getInstrutorById(chamadoDTO.getUidInstrutor());
+        Aluno aluno = alunoService.getAlunoById(chamadoDTO.getUidAluno());
+
+        Chamado chamado = new Chamado();
+        chamado.setInstrutor(instrutor);
+        chamado.setAluno(aluno);
+        chamado.setDataCriacao(LocalDate.now());
+        chamado.setStatusChamados(StatusChamados.ABERTO);
+
+        chamadoRepository.save(chamado);
+    }
+}
