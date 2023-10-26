@@ -29,6 +29,13 @@ public class ChamadoService {
     @Autowired
     private AlunoService alunoService;
 
+    public ChamadoService(ChamadoRepository chamadoRepository, FeedbackRepository feedbackRepository, InstrutorService instrutorService, AlunoService alunoService) {
+        this.chamadoRepository = chamadoRepository;
+        this.feedbackRepository = feedbackRepository;
+        this.instrutorService = instrutorService;
+        this.alunoService = alunoService;
+    }
+
 
     public void solicitarChamado(SolicitacaoChamadoDTO chamadoDTO) {
         Instrutor instrutor = instrutorService.getInstrutorById(chamadoDTO.getUidInstrutor());

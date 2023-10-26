@@ -20,6 +20,10 @@ public class AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
+    public AlunoService(AlunoRepository alunoRepository) {
+        this.alunoRepository = alunoRepository;
+    }
+
     public Aluno createAluno(Aluno aluno) {
         return alunoRepository.save(aluno);
     }

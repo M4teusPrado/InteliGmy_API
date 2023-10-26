@@ -20,6 +20,12 @@ public class AvaliacaoFisicaService {
     @Autowired
     private AlunoService alunoService;
 
+    public AvaliacaoFisicaService(AvaliacaoFisicaRepository avaliacaoFisicaRepository, InstrutorService instrutorService, AlunoService alunoService) {
+        this.avaliacaoFisicaRepository = avaliacaoFisicaRepository;
+        this.instrutorService = instrutorService;
+        this.alunoService = alunoService;
+    }
+
     public void agendarAvaliacaoParaInstrutor(AvaliacaoFisicaDTO dto) {
         AvaliacaoFisica avaliacaoFisica = criarNovaAvaliacaoFisica(dto);
         salvarAvaliacaoFisica(avaliacaoFisica);
