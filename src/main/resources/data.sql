@@ -2,7 +2,7 @@
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
 VALUES
   ('c7PtkoKRVpfUWcRVPgigIy3IV262', 'Mateus Prado', 'mateus.silvaprado@gmail.com', 0),
-  ('c7PtkoKRVpfUWcRVPgigIy3IV263', 'José Silva', 'jose.silva@example.com', 0),
+  ('ArswkgZfI3gl1c6QNeJRbUioBj12', 'José Silva', 'jose.silva@gmail.com', 0),
   ('c7PtkoKRVpfUWcRVPgigIy3IV264', 'Maria Oliveira', 'maria.oliveira@example.com', 0),
   ('c7PtkoKRVpfUWcRVPgigIy3IV265', 'Carlos Santos', 'carlos.santos@example.com', 0),
   ('c7PtkoKRVpfUWcRVPgigIy3IV266', 'Ana Pereira', 'ana.pereira@example.com', 0);
@@ -10,8 +10,8 @@ VALUES
 -- INSERIR DADOS NA TABELA GERENCIA
 INSERT INTO GERENCIA (ID, NOME_ACADEMIA, CNPJ, SENHA)
 VALUES
-  (1, 'Nome da Academia', '12345678901234', 'senha123'),
-  (2, 'Gym Name', '12345678901234', 'password123'),
+  (1, 'Nome da Academia', '12345678901234', 'Mateus!@#123'),
+  (2, 'Gym Name', '12345678901234', 'Mateus!@#123'),
   (3, 'Fitness Center', '98765432109876', 'securepass456'),
   (4, 'Health Club', '45678901234567', 'strongpass789'),
   (5, 'Sports Complex', '78901234567890', 'safeandstrong987');
@@ -45,7 +45,7 @@ VALUES
 -- INSERIR DADOS NA TABELA FEEDBACK
 INSERT INTO Feedback (INSTRUTOR_AVALIADO_ID, ALUNO_AVALIADOR_ID, CLASSIFICACAO, COMENTARIO, DATA_CRIACAO)
 VALUES
-  (7, 9, 4.5, 'Ótimo instrutor!', '2023-10-25'),
+  (8, 9, 4.5, 'Ótimo instrutor!', '2023-10-25'),
   (8, 10, 3.0, 'Bom trabalho, mas pode melhorar.', '2023-10-25');
 
 -- INSERIR DADOS NA TABELA AVALIACAO_FISICA

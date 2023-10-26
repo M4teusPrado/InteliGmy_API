@@ -11,7 +11,9 @@ import java.util.Optional;
 
 public interface InstrutorRepository extends JpaRepository<Instrutor, Long> {
 
-    @Query("SELECT i.gerente.alunos FROM Instrutor i WHERE i.uid = :uidInstrutor")
+    @Query("SELECT a FROM Aluno a " +
+            "JOIN Instrutor i ON a.gerente.id = i.gerente.id " +
+            "WHERE i.uid = :uidInstrutor")
     List<Aluno> findAlunosByInstrutorId(@Param("uidInstrutor") String uidInstrutor);
 
 

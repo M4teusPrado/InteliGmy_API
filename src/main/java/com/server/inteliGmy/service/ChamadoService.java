@@ -60,7 +60,14 @@ public class ChamadoService {
         feedback.setClassificacao(feedbackDTO.getClassificacao());
         feedback.setComentario(feedbackDTO.getComentario());
         feedback.setDataCriacao(LocalDate.now());
-
         feedbackRepository.save(feedback);
+
+        atualizarMediaAvaliacao(instrutor);
+    }
+
+    public void atualizarMediaAvaliacao(Instrutor instrutor){
+        Double media = feedbackRepository.calcularMediaClassificacaoPorInstrutor(instrutor.getId());
+        instrutor.setMediaAvaliacao(media);
+        instrutorService.saveInstrutor(instrutor);
     }
 }

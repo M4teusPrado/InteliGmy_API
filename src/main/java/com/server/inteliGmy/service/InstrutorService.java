@@ -28,7 +28,7 @@ public class InstrutorService {
         return instrutorRepository.findAll();
     }
 
-    public Instrutor createInstrutor(Instrutor instrutor) {
+    public Instrutor saveInstrutor(Instrutor instrutor) {
         return instrutorRepository.save(instrutor);
     }
 
@@ -61,6 +61,10 @@ public class InstrutorService {
             instrutor.setNome(instrutorDTO.getNome());
         }
 
-        instrutorRepository.save(instrutor);
+        if (instrutorDTO.getImgProfile() != null) {
+            instrutor.setImgProfile(instrutorDTO.getImgProfile());
+        }
+
+        saveInstrutor(instrutor);
     }
 }

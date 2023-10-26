@@ -61,7 +61,7 @@ public class GerenciaService {
     }
 
     private Instrutor createInstrutor(Instrutor instrutor) {
-        return instrutorService.createInstrutor(instrutor);
+        return instrutorService.saveInstrutor(instrutor);
     }
 
     private void associateInstrutorWithGerencia(Instrutor instrutor, Gerencia gerencia) {

@@ -15,6 +15,11 @@ public class Instrutor extends BaseUser {
     private String horario;
     private String senhaTemporaria;
 
+    @Lob
+    private byte[] imgProfile;
+
+    private Double mediaAvaliacao;
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gerencia_id")
@@ -24,7 +29,6 @@ public class Instrutor extends BaseUser {
     @JsonIgnore()
     @OneToMany(mappedBy = "instrutor", cascade = CascadeType.ALL)
     private List<AvaliacaoFisica> agendamentos;
-
 
     @Override
     public void setNivel(Nivel nivel) {
