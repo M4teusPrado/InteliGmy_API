@@ -3,10 +3,7 @@ package com.server.inteliGmy.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.server.inteliGmy.model.Enuns.Nivel;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -18,6 +15,9 @@ public class Gerencia extends BaseUser {
     private String nomeAcademia;
     private String cnpj;
     private String senha;
+
+    @Lob
+    private byte[] imgProfile;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "gerente")

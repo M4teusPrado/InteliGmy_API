@@ -39,7 +39,7 @@ public class GerenciaController {
 
     @PostMapping()
     public ResponseEntity<Gerencia> insertGerencia(@RequestBody Gerencia gerencia) {
-        Gerencia gerenciaInserida = gerenciaService.insertGerencia(gerencia);
+        Gerencia gerenciaInserida = gerenciaService.saveGerencia(gerencia);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(gerenciaInserida.getId()).toUri();
         return ResponseEntity.created(uri).body(gerenciaInserida);
     }

@@ -37,9 +37,15 @@ public class GerenciaService {
         if (gerenciaDTO.getNome() != null) {
             gerencia.setNome(gerenciaDTO.getNome());
         }
+
+        if (gerenciaDTO.getImgProfile() != null) {
+            gerencia.setImgProfile(gerenciaDTO.getImgProfile());
+        }
+
+        saveGerencia(gerencia);
     }
 
-    public Gerencia insertGerencia(Gerencia gerencia) {
+    public Gerencia saveGerencia(Gerencia gerencia) {
         return gerenciaRepository.save(gerencia);
     }
 
@@ -49,8 +55,7 @@ public class GerenciaService {
         Instrutor savedInstrutor = insertInstrutorFirebase(instrutor);
         savedInstrutor = createInstrutor(savedInstrutor);
         associateInstrutorWithGerencia(savedInstrutor, gerencia);
-        updateGerenciaWithNewInstrutor(gerencia);
-
+        saveGerencia(gerencia);
         return savedInstrutor;
     }
 
@@ -67,10 +72,6 @@ public class GerenciaService {
     private void associateInstrutorWithGerencia(Instrutor instrutor, Gerencia gerencia) {
         gerencia.addInstrutor(instrutor);
         instrutor.setGerente(gerencia);
-    }
-
-    private void updateGerenciaWithNewInstrutor(Gerencia gerencia) {
-        insertGerencia(gerencia);
     }
 
     public List<Instrutor> getInstrutores(String uidGerente) {

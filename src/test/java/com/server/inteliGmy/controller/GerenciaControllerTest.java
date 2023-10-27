@@ -91,7 +91,7 @@ public class GerenciaControllerTest {
         gerencia.setCnpj("987654321");
         gerencia.setSenha("novasenha");
 
-        when(gerenciaService.insertGerencia(any(Gerencia.class))).thenReturn(gerencia);
+        when(gerenciaService.saveGerencia(any(Gerencia.class))).thenReturn(gerencia);
 
         mockMvc.perform(post("/owner")
                         .contentType(MediaType.APPLICATION_JSON)
