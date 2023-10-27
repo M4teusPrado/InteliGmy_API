@@ -25,6 +25,13 @@ public class Instrutor extends BaseUser {
     @JoinColumn(name = "gerencia_id")
     private Gerencia gerente;
 
+    @JsonIgnore()
+    @OneToMany(mappedBy = "instrutor", cascade = CascadeType.REMOVE)
+    private List<Chamado> chamados;
+
+    @JsonIgnore()
+    @OneToMany(mappedBy = "instrutorAvaliado", cascade = CascadeType.REMOVE)
+    private List<Feedback> feedbacks;
 
     @JsonIgnore()
     @OneToMany(mappedBy = "instrutor", cascade = CascadeType.ALL)
