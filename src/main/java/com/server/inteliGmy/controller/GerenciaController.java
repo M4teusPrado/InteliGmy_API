@@ -2,6 +2,7 @@ package com.server.inteliGmy.controller;
 
 import com.google.firebase.auth.FirebaseAuthException;
 import com.server.inteliGmy.model.Gerencia;
+import com.server.inteliGmy.model.HorarioAlunos;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.service.GerenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,12 @@ public class GerenciaController {
     public ResponseEntity<Void> associateAlunoWithGerencia(@PathVariable String uid, @PathVariable String uidAluno) {
         gerenciaService.associateAlunoWithGerencia(uid, uidAluno);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/{uid}/curvaAlunosPorHora")
+    public ResponseEntity<List<HorarioAlunos>> obterCurvaAlunosPorHora(@PathVariable String uid) {
+        List<HorarioAlunos> curva = gerenciaService.obterCurvaAlunosPorHora(uid);
+        return ResponseEntity.ok(curva);
     }
 }

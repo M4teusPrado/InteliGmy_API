@@ -4,14 +4,19 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import com.server.inteliGmy.model.Aluno;
 import com.server.inteliGmy.model.Gerencia;
+import com.server.inteliGmy.model.HorarioAlunos;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.GerenciaRepository;
+import jakarta.persistence.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -88,4 +93,31 @@ public class GerenciaService {
         Aluno aluno = alunoService.getAlunoById(uidAluno);
         gerencia.addAluno(aluno);
     }
+
+    public List<HorarioAlunos> obterCurvaAlunosPorHora(String uidGerencia) {
+        Gerencia gerencia = getGerenciaById(uidGerencia);
+        return obterMediaUsuariosLogadosPorHorario(gerencia.getId());
+    }
+
+    public List<HorarioAlunos> obterMediaUsuariosLogadosPorHorario(Long idGerencia) {
+        List<Tuple> resultados = gerenciaRepository.contarUsuariosLogadosPorHorario(idGerencia);
+        return extrairHorarioAlunos(resultados);
+    }
+
+    public List<HorarioAlunos> extrairHorarioAlunos(List<Tuple> resultados) {
+        List<Integer> horariosValidos = Arrays.asList(6, 8, 10, 12, 14, 16, 18, 20, 22);
+        List<HorarioAlunos> listaObjetos = new ArrayList<>();
+
+        for (Tuple resultado : resultados) {
+            int horario = resultado.get(0, Integer.class);
+            BigDecimal mediaUsuariosLogados = resultado.get(1, BigDecimal.class);
+
+            if (horariosValidos.contains(horario)) {
+                listaObjetos.add(new HorarioAlunos(horario, mediaUsuariosLogados));
+            }
+        }
+        return listaObjetos;
+    }
 }
+
+
