@@ -1,3 +1,79 @@
+CREATE DATABASE inteligmy_database;
+
+CREATE TABLE base_user (
+    id SERIAL PRIMARY KEY,
+    uid VARCHAR(255),
+    nome VARCHAR(255),
+    email VARCHAR(255),
+    nivel VARCHAR(255)
+);
+
+CREATE TABLE log_usuario (
+    id SERIAL PRIMARY KEY,
+    base_user_id BIGINT,
+    data_login DATE,
+    horario_login TIMESTAMP,
+    FOREIGN KEY (base_user_id) REFERENCES base_user(id)
+);
+
+CREATE TABLE gerencia (
+    id SERIAL PRIMARY KEY,
+    nome_academia VARCHAR(255),
+    cnpj VARCHAR(255),
+    senha VARCHAR(255),
+    img_profile BYTEA
+);
+
+CREATE TABLE aluno (
+    id SERIAL PRIMARY KEY,
+    gerencia_id BIGINT,
+    FOREIGN KEY (gerencia_id) REFERENCES gerencia(id)
+);
+
+CREATE TABLE instrutor (
+    id SERIAL PRIMARY KEY,
+    horario VARCHAR(255),
+    senha_temporaria VARCHAR(255),
+    img_profile BYTEA,
+    media_avaliacao DOUBLE PRECISION,
+    gerencia_id BIGINT,
+    FOREIGN KEY (gerencia_id) REFERENCES gerencia(id)
+);
+
+
+CREATE TABLE feedback (
+    id SERIAL PRIMARY KEY,
+    instrutor_avaliado_id BIGINT,
+    aluno_avaliador_id BIGINT,
+    classificacao DOUBLE PRECISION,
+    comentario TEXT,
+    data_criacao DATE,
+    FOREIGN KEY (instrutor_avaliado_id) REFERENCES instrutor(id),
+    FOREIGN KEY (aluno_avaliador_id) REFERENCES aluno(id)
+);
+
+CREATE TABLE chamado (
+    id SERIAL PRIMARY KEY,
+    aluno_id BIGINT,
+    status_chamados VARCHAR(255),
+    data_criacao DATE,
+    horario_conclusao DATE,
+    instrutor_id BIGINT,
+    FOREIGN KEY (aluno_id) REFERENCES aluno(id),
+    FOREIGN KEY (instrutor_id) REFERENCES instrutor(id)
+);
+
+CREATE TABLE avaliacao_fisica (
+    id SERIAL PRIMARY KEY,
+    instrutor_id BIGINT,
+    aluno_id BIGINT,
+    data_avaliacao DATE,
+    horario_avaliacao TIME,
+    FOREIGN KEY (instrutor_id) REFERENCES instrutor(id),
+    FOREIGN KEY (aluno_id) REFERENCES aluno(id)
+);
+
+
 -- INSERIR DADOS NA TABELA BASE_USER PARA A GERENCIA
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
 VALUES
@@ -252,6 +328,7 @@ VALUES
     (9, '2023-11-15', '2023-11-15 22:00:00.000000'),
     (9, '2023-11-15', '2023-11-15 14:30:00.000000'),
     (9, '2023-11-15', '2023-11-15 18:45:00.000000');
+
 
 
 

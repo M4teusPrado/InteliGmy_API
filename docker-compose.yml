@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+  api:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: "server"
+    ports:
+      - "8080:8080"
+    environment:
+      DB_HOST: host.docker.internal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    depends_on:
+      - db
+    networks:
+      - default
+
+networks:
+  postgres-compose-network:
+    driver: bridge
