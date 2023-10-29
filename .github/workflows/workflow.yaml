@@ -96,7 +96,21 @@ jobs:
         id: auth
         uses: 'google-github-actions/auth@v0'
         with:
-          credentials_json: '${{ secrets.SA_CREDS }}'
+          credentials_json: |
+            {
+              "type": "service_account",
+              "project_id": "inteligmy",
+              "private_key_id": "4ee63d86a86d3b2678c4ad7d31cf225fb11d2b0c",
+              "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCeib1xNOSOyA0Z\nbH4SZHM3Rh/wxG0VLj+fHZn9UW3DWWrphBA5q22hKXWyOwk8alXTe1ZIrT2wr2RL\nZ1flmEWhZzXwl5ulIYmb95yHOBTwGYSAR5HyzgDWn9nfxreC+/Q0igvdJQ5ne0m0\nPSXzpD1jNQZXIZm8k6K1z04p7V7lRFEAWRa46YsLcvPX3UodwappCs2un8EF65vJ\n/2XTZoPQ3+4xVWLbE8G0c9VNmjI0wgGsAe0BfRY3U7lD6UNbDgdABERpi0r9Vymm\nNaWyJ2njGUnTsGma1anhB6Ddv5PqRUef3exLQf+PyTn/MPKhHV6VjNnxD/zJNu3M\nEW1yKmNxAgMBAAECggEAMqWNLCO6GnUFXkhfFDAb8J4J6ShPMtOGBqZ1wcvoNV6U\n/Ymvh0ThLnmovGoIvtC3n2qI+4nAqfe2IjKfDV1ybSgkPrqoQf4vUHCvhDEh2zxD\nrJlwojE2alpBx6/bg1BLSReKx7ilW+CygI6CV83xwIY5gs9cpjZB5jQWY+WNic8i\n68AE+mHGky9Yg1D2prVpdWa37ZYqxHQuMuoKiGUkcvb/DKWW4As9xbViNLGkpRAq\nSUL4Xed3hHgYscB6KPLh0j6eWQ1E7kjFdG952LCkDE6x44OAUwLExWSgnVInY/UF\nShtJ1c3kflRf2aD47pt3w/Knah4TktMR6/yoB94i8wKBgQDUmTnZgCPC9Rq3SNNA\nNOP4iuO3bFoENSsqImF8FNssryyuhjGxDRe/KdLLShGLyugOFfvG5Zc11UoKQz3s\nk8PhajIdQqiWRmKqhHEO0g6B0Em9bRC/KPz/2k6m8jHdN1aqHhvsEsQworNwZfA4\n71pFzDCYd5vT8VCa4qumjYEglwKBgQC+5zevZZO0YIqz86J9ruH1yyYo5VlHYBtj\nzlaXS59aPHE59nDDjqgy+Z2fYiVBTVuNVbqcup/gE/uFsBtM+qT4USdgi6NpJfvk\nK8Ci7ftRvmVD2lVZbn0gQ4M32lDRgZuOqtQwnaPmN3jwDD3vz+Xa2wYfBTBsWjGT\nH5tk4kAVNwKBgE/ycwu0oT4eN/a2vyJFAXmkmS+P4mX0rI/CsBAeM7GhCldzBVrE\nRqrPioKCDwkXu54YbD8GdY977sTfNnkxtBaffcr9FzKzs0TWW0GsgmIUtrYyPnr0\nafe425zyNQgwWDnO6sci4346oOnim6x9beATgi7Dw+i2tY4ZMV2HlwhvAoGBAIHb\nfoGNMyAr2631OL8Nyx8LhXWkLUrkET2fCj/4bPlQzCSFgsdDrx6dtZ7JgFYfbPuD\nKWGbgU1HynxyAuAmTzmq2oJN+mZ4NBRNvsgV4jMEtJWnWw9unSbpRcUkeH1LEKnH\ngndfhDIB4f5IFYmffdeVzWAkg3/xCm/tvCKv1K+ZAoGBAMr/cVNxOO2H9tmI+UU5\n4pL09lxTygpAOoTBYG48p/7nBdWu748Jj0imJhC3suOSiXpMaPykiU2onQkyeMZJ\nq+JmvGqjPV//+gLPSMOU4WjU9r8fG1DX4rwujTEoP5SgwbW/K9EnRg+TwrRY+m2C\nvwN787GUteP6GAVo4R6LqbUH\n-----END PRIVATE KEY-----\n",
+              "client_email": "github@inteligmy.iam.gserviceaccount.com",
+              "client_id": "117159060461250542949",
+              "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+              "token_uri": "https://oauth2.googleapis.com/token",
+              "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+              "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/github%40inteligmy.iam.gserviceaccount.com",
+              "universe_domain": "googleapis.com"
+            }
+
 
       - name: Deploy to Cloud Run
         id: deploy
