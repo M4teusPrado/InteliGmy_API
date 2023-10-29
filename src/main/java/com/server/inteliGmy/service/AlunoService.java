@@ -46,6 +46,10 @@ public class AlunoService {
             gerencia.setEmail(alunoDTO.getEmail());
         }
 
+        if (alunoDTO.getImgProfile() != null) {
+            gerencia.setImgProfile(alunoDTO.getImgProfile());
+        }
+
         alunoRepository.save(gerencia);
 
     }

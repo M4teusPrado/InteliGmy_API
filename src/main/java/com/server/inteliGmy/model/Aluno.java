@@ -22,6 +22,9 @@ public class Aluno extends BaseUser {
     @JoinColumn(name = "gerencia_id")
     private Gerencia gerente;
 
+    @Lob
+    private byte[] imgProfile;
+
     @JsonIgnore()
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
     private List<AvaliacaoFisica> agendamentos;
