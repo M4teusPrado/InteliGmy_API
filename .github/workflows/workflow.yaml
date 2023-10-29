@@ -7,7 +7,7 @@ on:
 
 env:
   PROJECT_ID: inteligmy
-  SERVICE: InteliGmy
+  SERVICE: inteligmy-service
   REGION: us-central1
 
 
