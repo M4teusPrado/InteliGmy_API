@@ -128,8 +128,6 @@ jobs:
         with:
           username: 'mateussp18'
           password: 'Mateus!@#123'
-          registry: '${{ env.GAR_LOCATION }}-docker.pkg.dev'
-
 
       - name: Build and Push Container
         run: |-
