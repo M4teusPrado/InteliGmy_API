@@ -94,7 +94,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-
+      - name: Make Maven Wrapper Executable
+        run: chmod +x mvnw
+        
       - name: Google Auth
         id: auth
         uses: 'google-github-actions/auth@v0'
