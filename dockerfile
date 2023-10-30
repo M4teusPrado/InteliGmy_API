@@ -1,4 +1,5 @@
 FROM openjdk:17-jdk
-COPY ./target/*.jar /app/inteligmy.jar
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} inteligmy.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app/inteligmy.jar"]
+ENTRYPOINT ["java", "-jar", "./inteligmy.jar"]
