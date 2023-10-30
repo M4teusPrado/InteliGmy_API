@@ -9,7 +9,7 @@ env:
   PROJECT_ID: inteligmy
   SERVICE: inteligmy-service
   REGION: us-central1
-  GAR_LOCATION: us-central1
+  GAR_LOCATION: us
 
 
 jobs:
