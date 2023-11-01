@@ -1,12 +1,17 @@
 package com.server.inteliGmy.service;
 
 import com.server.inteliGmy.DTOs.AvaliacaoFisicaDTO;
+import com.server.inteliGmy.DTOs.AvaliacaoFisicaResponseDTO;
 import com.server.inteliGmy.model.AvaliacaoFisica;
 import com.server.inteliGmy.model.Aluno;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.AvaliacaoFisicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AvaliacaoFisicaService {
@@ -45,5 +50,22 @@ public class AvaliacaoFisicaService {
 
     public void salvarAvaliacaoFisica(AvaliacaoFisica avaliacao) {
         avaliacaoFisicaRepository.save(avaliacao);
+    }
+
+    public List<AvaliacaoFisicaResponseDTO> buscarAvaliacoesPorData(LocalDate data) {
+        List<AvaliacaoFisica> avaliacoes = avaliacaoFisicaRepository.findByDataAvaliacao(data);
+        List<AvaliacaoFisicaResponseDTO> dtos = new ArrayList<>();
+
+        for (AvaliacaoFisica avaliacao : avaliacoes) {
+            AvaliacaoFisicaResponseDTO dto = new AvaliacaoFisicaResponseDTO();
+            dto.setId(avaliacao.getId());
+            dto.setInstrutorId(avaliacao.getInstrutor().getId());
+            dto.setAluno(avaliacao.getAluno());
+            dto.setDataAvaliacao(avaliacao.getDataAvaliacao());
+            dto.setHorarioAvaliacao(avaliacao.getHorarioAvaliacao());
+            dtos.add(dto);
+        }
+
+        return dtos;
     }
 }

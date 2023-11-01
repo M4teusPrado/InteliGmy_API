@@ -1,13 +1,15 @@
 package com.server.inteliGmy.controller;
 
 import com.server.inteliGmy.DTOs.AvaliacaoFisicaDTO;
+import com.server.inteliGmy.DTOs.AvaliacaoFisicaResponseDTO;
 import com.server.inteliGmy.service.AvaliacaoFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/avaliacao")
@@ -20,6 +22,17 @@ public class AvaliacaoFisicaController {
     public ResponseEntity<Void> scheduleAvaliacaoFisicaForInstructor(@RequestBody AvaliacaoFisicaDTO avaliacaoFisicaDTO) {
         avaliacaoFisicaService.agendarAvaliacaoParaInstrutor(avaliacaoFisicaDTO);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/buscarPorData")
+    public ResponseEntity<List<AvaliacaoFisicaResponseDTO>> buscarAvaliacoesPorData(@RequestParam(value = "data", defaultValue = "") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate data) {
+
+        if (data == null) {
+            data = LocalDate.now();
+        }
+
+        List<AvaliacaoFisicaResponseDTO> avaliacoes = avaliacaoFisicaService.buscarAvaliacoesPorData(data);
+        return ResponseEntity.ok(avaliacoes);
     }
 
 }
