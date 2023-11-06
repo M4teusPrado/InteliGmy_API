@@ -12,23 +12,20 @@ import java.util.List;
 @Entity
 public class Aluno extends BaseUser {
 
-    @Override
-    public void setNivel(Nivel nivel) {
-        super.setNivel(Nivel.ALUNO);
-    }
-
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gerencia_id")
     private Gerencia gerente;
-
     @Lob
     private byte[] imgProfile;
-
     @JsonIgnore()
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
     private List<AvaliacaoFisica> agendamentos;
 
+    @Override
+    public void setNivel(Nivel nivel) {
+        super.setNivel(Nivel.ALUNO);
+    }
 
     @Override
     public String toString() {
