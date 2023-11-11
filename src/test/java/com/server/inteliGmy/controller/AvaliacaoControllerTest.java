@@ -2,7 +2,7 @@ package com.server.inteliGmy.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.server.inteliGmy.DTOs.AvaliacaoFisicaDTO;
+import com.server.inteliGmy.DTOs.avaliacao.AgendamentoAvaliacaoFisicaDTO;
 import com.server.inteliGmy.service.AvaliacaoFisicaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class AvaliacaoFisicaControllerTest {
+class AvaliacaoControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -28,18 +28,18 @@ class AvaliacaoFisicaControllerTest {
     @Test
     void testScheduleAvaliacaoFisicaForInstructor() throws Exception {
         // Arrange
-        AvaliacaoFisicaDTO avaliacaoFisicaDTO = new AvaliacaoFisicaDTO();
-        avaliacaoFisicaDTO.setUidInstrutor("1"); // Defina o ID do instrutor conforme necessário
-        avaliacaoFisicaDTO.setUidAluno("2"); // Defina o ID do aluno conforme necessário
+        AgendamentoAvaliacaoFisicaDTO agendamentoAvaliacaoFisicaDTO = new AgendamentoAvaliacaoFisicaDTO();
+        agendamentoAvaliacaoFisicaDTO.setUidInstrutor("1"); // Defina o ID do instrutor conforme necessário
+        agendamentoAvaliacaoFisicaDTO.setUidAluno("2"); // Defina o ID do aluno conforme necessário
 
         // Act
         mockMvc.perform(post("/avaliacao/agendarAvaliacao")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(avaliacaoFisicaDTO)))
+                        .content(asJsonString(agendamentoAvaliacaoFisicaDTO)))
                 .andExpect(status().isOk());
 
         // Assert
-        verify(avaliacaoFisicaService, times(1)).agendarAvaliacaoParaInstrutor(avaliacaoFisicaDTO);
+        verify(avaliacaoFisicaService, times(1)).agendarAvaliacaoParaInstrutor(agendamentoAvaliacaoFisicaDTO);
     }
 
     // Método auxiliar para converter objeto em JSON

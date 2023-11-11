@@ -1,13 +1,10 @@
 package com.server.inteliGmy.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.server.inteliGmy.helper.CustomLocalDateDeserializer;
-import com.server.inteliGmy.helper.CustomLocalTimeDeserializer;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Data
 @Entity
@@ -17,19 +14,21 @@ public class AvaliacaoFisica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "instrutor_id") // Nome da coluna que faz a relação com o Instrutor
-    private Instrutor instrutor;
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
-
-    @JsonDeserialize(using = CustomLocalDateDeserializer.class)
-    @Temporal(TemporalType.DATE) // Apenas a data
-    private LocalDate dataAvaliacao;
-
-    @JsonDeserialize(using = CustomLocalTimeDeserializer.class)
-    private LocalTime horarioAvaliacao;
+    private Double altura;
+    private Double peso;
+    private Double imc;
+    private Double gorduraCorporal;
+    private Double gorduraVisceral;
+    private Double antebracoEsquerdo;
+    private Double antebracoDireito;
+    private Double bracoEsquerdo;
+    private Double bracoDireito;
+    private Double coxaEsquerda;
+    private Double coxaDireita;
+    private Double panturrilhaEsquerda;
+    private Double panturrilhaDireita;
+    private Double cintura;
+    private Double abdomen;
+    private Double quadril;
 
 }

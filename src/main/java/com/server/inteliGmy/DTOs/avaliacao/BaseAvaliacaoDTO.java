@@ -1,4 +1,4 @@
-package com.server.inteliGmy.DTOs;
+package com.server.inteliGmy.DTOs.avaliacao;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.server.inteliGmy.helper.CustomLocalDateDeserializer;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
-public class AvaliacaoFisicaDTO {
+public abstract class BaseAvaliacaoDTO {
 
     private String uidInstrutor;
     private String uidAluno;

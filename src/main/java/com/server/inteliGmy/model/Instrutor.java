@@ -35,7 +35,7 @@ public class Instrutor extends BaseUser {
 
     @JsonIgnore()
     @OneToMany(mappedBy = "instrutor", cascade = CascadeType.ALL)
-    private List<AvaliacaoFisica> agendamentos;
+    private List<Avaliacao> agendamentos;
 
     @Override
     public void setNivel(Nivel nivel) {

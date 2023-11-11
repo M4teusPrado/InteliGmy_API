@@ -1,7 +1,8 @@
 package com.server.inteliGmy.controller;
 
-import com.server.inteliGmy.DTOs.AvaliacaoFisicaDTO;
-import com.server.inteliGmy.DTOs.AvaliacaoFisicaResponseDTO;
+import com.server.inteliGmy.DTOs.avaliacao.AgendamentoAvaliacaoFisicaDTO;
+import com.server.inteliGmy.DTOs.avaliacao.AvaliacaoDTO;
+import com.server.inteliGmy.DTOs.avaliacao.AvaliacaoFisicaResponseDTO;
 import com.server.inteliGmy.service.AvaliacaoFisicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,8 +20,8 @@ public class AvaliacaoFisicaController {
     private AvaliacaoFisicaService avaliacaoFisicaService;
 
     @PostMapping("/agendarAvaliacao")
-    public ResponseEntity<Void> scheduleAvaliacaoFisicaForInstructor(@RequestBody AvaliacaoFisicaDTO avaliacaoFisicaDTO) {
-        avaliacaoFisicaService.agendarAvaliacaoParaInstrutor(avaliacaoFisicaDTO);
+    public ResponseEntity<Void> scheduleAvaliacaoFisicaForInstructor(@RequestBody AgendamentoAvaliacaoFisicaDTO agendamentoAvaliacaoFisicaDTO) {
+        avaliacaoFisicaService.agendarAvaliacaoParaInstrutor(agendamentoAvaliacaoFisicaDTO);
         return ResponseEntity.ok().build();
     }
 
@@ -33,6 +34,12 @@ public class AvaliacaoFisicaController {
 
         List<AvaliacaoFisicaResponseDTO> avaliacoes = avaliacaoFisicaService.buscarAvaliacoesPorData(data);
         return ResponseEntity.ok(avaliacoes);
+    }
+
+    @PostMapping("/avaliar")
+    public ResponseEntity<Void> avaliarAvaliacaoFisica(@RequestBody AvaliacaoDTO avaliacaoDTO) {
+        avaliacaoFisicaService.processarAvaliacaoFisica(avaliacaoDTO);
+        return ResponseEntity.ok().build();
     }
 
 }

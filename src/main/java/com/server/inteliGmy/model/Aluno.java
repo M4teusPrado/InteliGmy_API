@@ -20,7 +20,7 @@ public class Aluno extends BaseUser {
     private byte[] imgProfile;
     @JsonIgnore()
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
-    private List<AvaliacaoFisica> agendamentos;
+    private List<Avaliacao> agendamentos;
 
     @Override
     public void setNivel(Nivel nivel) {

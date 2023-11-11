@@ -1,9 +1,11 @@
 package com.server.inteliGmy.service;
 
-import com.server.inteliGmy.DTOs.AvaliacaoFisicaDTO;
-import com.server.inteliGmy.DTOs.AvaliacaoFisicaResponseDTO;
-import com.server.inteliGmy.model.AvaliacaoFisica;
+import com.server.inteliGmy.DTOs.avaliacao.AgendamentoAvaliacaoFisicaDTO;
+import com.server.inteliGmy.DTOs.avaliacao.AvaliacaoDTO;
+import com.server.inteliGmy.DTOs.avaliacao.AvaliacaoFisicaResponseDTO;
+import com.server.inteliGmy.DTOs.avaliacao.BaseAvaliacaoDTO;
 import com.server.inteliGmy.model.Aluno;
+import com.server.inteliGmy.model.Avaliacao;
 import com.server.inteliGmy.model.Instrutor;
 import com.server.inteliGmy.repository.AvaliacaoFisicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,32 +33,32 @@ public class AvaliacaoFisicaService {
         this.alunoService = alunoService;
     }
 
-    public void agendarAvaliacaoParaInstrutor(AvaliacaoFisicaDTO dto) {
-        AvaliacaoFisica avaliacaoFisica = criarNovaAvaliacaoFisica(dto);
-        salvarAvaliacaoFisica(avaliacaoFisica);
+    public void agendarAvaliacaoParaInstrutor(AgendamentoAvaliacaoFisicaDTO dto) {
+        Avaliacao avaliacao = criarNovaAvaliacaoFisica(dto);
+        salvarAvaliacaoFisica(avaliacao);
     }
 
-    private AvaliacaoFisica criarNovaAvaliacaoFisica(AvaliacaoFisicaDTO dto) {
+    private Avaliacao criarNovaAvaliacaoFisica(BaseAvaliacaoDTO dto) {
         Instrutor instrutor = instrutorService.getInstrutorById(dto.getUidInstrutor());
-        Aluno aluno =  alunoService.getAlunoById(dto.getUidAluno());
+        Aluno aluno = alunoService.getAlunoById(dto.getUidAluno());
 
-        AvaliacaoFisica avaliacaoFisica = new AvaliacaoFisica();
-        avaliacaoFisica.setInstrutor(instrutor);
-        avaliacaoFisica.setAluno(aluno);
-        avaliacaoFisica.setDataAvaliacao(dto.getDataAvaliacao());
-        avaliacaoFisica.setHorarioAvaliacao(dto.getHorarioAvaliacao());
-        return avaliacaoFisica;
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setInstrutor(instrutor);
+        avaliacao.setAluno(aluno);
+        avaliacao.setDataAvaliacao(dto.getDataAvaliacao());
+        avaliacao.setHorarioAvaliacao(dto.getHorarioAvaliacao());
+        return avaliacao;
     }
 
-    public void salvarAvaliacaoFisica(AvaliacaoFisica avaliacao) {
+    public void salvarAvaliacaoFisica(Avaliacao avaliacao) {
         avaliacaoFisicaRepository.save(avaliacao);
     }
 
     public List<AvaliacaoFisicaResponseDTO> buscarAvaliacoesPorData(LocalDate data) {
-        List<AvaliacaoFisica> avaliacoes = avaliacaoFisicaRepository.findByDataAvaliacao(data);
+        List<Avaliacao> avaliacoes = avaliacaoFisicaRepository.findByDataAvaliacao(data);
         List<AvaliacaoFisicaResponseDTO> dtos = new ArrayList<>();
 
-        for (AvaliacaoFisica avaliacao : avaliacoes) {
+        for (Avaliacao avaliacao : avaliacoes) {
             AvaliacaoFisicaResponseDTO dto = new AvaliacaoFisicaResponseDTO();
             dto.setId(avaliacao.getId());
             dto.setInstrutorId(avaliacao.getInstrutor().getId());
@@ -67,5 +69,14 @@ public class AvaliacaoFisicaService {
         }
 
         return dtos;
+    }
+
+    public void processarAvaliacaoFisica(AvaliacaoDTO dto) {
+        Avaliacao avaliacao = (dto.getIdAvaliacao() == null) ?
+                criarNovaAvaliacaoFisica(dto) :
+                avaliacaoFisicaRepository.findById(dto.getIdAvaliacao()).get();
+
+        avaliacao.setAvaliacaoFisica(dto.getAvaliacaoFisica());
+        salvarAvaliacaoFisica(avaliacao);
     }
 }

@@ -1,4 +1,4 @@
-package com.server.inteliGmy.DTOs;
+package com.server.inteliGmy.DTOs.avaliacao;
 
 import com.server.inteliGmy.model.Aluno;
 
