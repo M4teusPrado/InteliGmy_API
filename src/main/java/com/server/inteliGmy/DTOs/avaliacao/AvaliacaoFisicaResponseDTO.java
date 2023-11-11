@@ -1,6 +1,7 @@
 package com.server.inteliGmy.DTOs.avaliacao;
 
 import com.server.inteliGmy.model.Aluno;
+import com.server.inteliGmy.model.AvaliacaoFisica;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,6 +13,7 @@ public class AvaliacaoFisicaResponseDTO {
     private Aluno aluno;
     private LocalDate dataAvaliacao;
     private LocalTime horarioAvaliacao;
+    private AvaliacaoFisica avaliacaoFisica;
 
     public Long getId() {
         return id;
@@ -51,5 +53,13 @@ public class AvaliacaoFisicaResponseDTO {
 
     public void setHorarioAvaliacao(LocalTime horarioAvaliacao) {
         this.horarioAvaliacao = horarioAvaliacao;
+    }
+
+    public AvaliacaoFisica getAvaliacaoFisica() {
+        return avaliacaoFisica;
+    }
+
+    public void setAvaliacaoFisica(AvaliacaoFisica avaliacaoFisica) {
+        this.avaliacaoFisica = avaliacaoFisica;
     }
 }

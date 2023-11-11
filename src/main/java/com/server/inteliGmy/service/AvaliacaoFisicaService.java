@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AvaliacaoFisicaService {
@@ -56,19 +56,7 @@ public class AvaliacaoFisicaService {
 
     public List<AvaliacaoFisicaResponseDTO> buscarAvaliacoesPorData(LocalDate data) {
         List<Avaliacao> avaliacoes = avaliacaoFisicaRepository.findByDataAvaliacao(data);
-        List<AvaliacaoFisicaResponseDTO> dtos = new ArrayList<>();
-
-        for (Avaliacao avaliacao : avaliacoes) {
-            AvaliacaoFisicaResponseDTO dto = new AvaliacaoFisicaResponseDTO();
-            dto.setId(avaliacao.getId());
-            dto.setInstrutorId(avaliacao.getInstrutor().getId());
-            dto.setAluno(avaliacao.getAluno());
-            dto.setDataAvaliacao(avaliacao.getDataAvaliacao());
-            dto.setHorarioAvaliacao(avaliacao.getHorarioAvaliacao());
-            dtos.add(dto);
-        }
-
-        return dtos;
+        return mapToResponseDTO(avaliacoes);
     }
 
     public void processarAvaliacaoFisica(AvaliacaoDTO dto) {
@@ -78,5 +66,27 @@ public class AvaliacaoFisicaService {
 
         avaliacao.setAvaliacaoFisica(dto.getAvaliacaoFisica());
         salvarAvaliacaoFisica(avaliacao);
+    }
+
+    public List<AvaliacaoFisicaResponseDTO> buscarAvaliacaoByAluno(String uidAluno) {
+        List<Avaliacao> avaliacaos = avaliacaoFisicaRepository.buscarAvaliacaoByAluno(uidAluno);
+        return mapToResponseDTO(avaliacaos);
+    }
+
+    public List<AvaliacaoFisicaResponseDTO> mapToResponseDTO(List<Avaliacao> avaliacoes) {
+        return avaliacoes.stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private AvaliacaoFisicaResponseDTO mapToDTO(Avaliacao avaliacao) {
+        AvaliacaoFisicaResponseDTO dto = new AvaliacaoFisicaResponseDTO();
+        dto.setId(avaliacao.getId());
+        dto.setInstrutorId(avaliacao.getInstrutor().getId());
+        dto.setAluno(avaliacao.getAluno());
+        dto.setDataAvaliacao(avaliacao.getDataAvaliacao());
+        dto.setHorarioAvaliacao(avaliacao.getHorarioAvaliacao());
+        dto.setAvaliacaoFisica(avaliacao.getAvaliacaoFisica());
+        return dto;
     }
 }

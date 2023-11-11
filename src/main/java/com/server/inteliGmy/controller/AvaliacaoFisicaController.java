@@ -36,6 +36,14 @@ public class AvaliacaoFisicaController {
         return ResponseEntity.ok(avaliacoes);
     }
 
+
+    @GetMapping("/alunos/{uidAluno}")
+    public ResponseEntity<List<AvaliacaoFisicaResponseDTO>> a(@PathVariable String uidAluno) {
+
+        List<AvaliacaoFisicaResponseDTO> avaliacoes = avaliacaoFisicaService.buscarAvaliacaoByAluno(uidAluno);
+        return ResponseEntity.ok(avaliacoes);
+    }
+
     @PostMapping("/avaliar")
     public ResponseEntity<Void> avaliarAvaliacaoFisica(@RequestBody AvaliacaoDTO avaliacaoDTO) {
         avaliacaoFisicaService.processarAvaliacaoFisica(avaliacaoDTO);
