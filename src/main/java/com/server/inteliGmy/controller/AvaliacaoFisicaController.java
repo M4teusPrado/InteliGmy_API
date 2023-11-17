@@ -36,10 +36,14 @@ public class AvaliacaoFisicaController {
         return ResponseEntity.ok(avaliacoes);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AvaliacaoFisicaResponseDTO> buscarAvaliacaoPorId(@PathVariable Long id) {
+        AvaliacaoFisicaResponseDTO avaliacoes = avaliacaoFisicaService.buscarAvaliacaoById(id);
+        return ResponseEntity.ok(avaliacoes);
+    }
 
     @GetMapping("/alunos/{uidAluno}")
-    public ResponseEntity<List<AvaliacaoFisicaResponseDTO>> a(@PathVariable String uidAluno) {
-
+    public ResponseEntity<List<AvaliacaoFisicaResponseDTO>> buscarAvaliacoesPorAluno(@PathVariable String uidAluno) {
         List<AvaliacaoFisicaResponseDTO> avaliacoes = avaliacaoFisicaService.buscarAvaliacaoByAluno(uidAluno);
         return ResponseEntity.ok(avaliacoes);
     }

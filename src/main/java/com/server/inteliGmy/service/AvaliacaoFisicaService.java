@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,7 +65,10 @@ public class AvaliacaoFisicaService {
                 criarNovaAvaliacaoFisica(dto) :
                 avaliacaoFisicaRepository.findById(dto.getIdAvaliacao()).get();
 
+        avaliacao.setDataAvaliacao(LocalDate.now());
+        avaliacao.setHorarioAvaliacao(LocalTime.now());
         avaliacao.setAvaliacaoFisica(dto.getAvaliacaoFisica());
+
         salvarAvaliacaoFisica(avaliacao);
     }
 
@@ -88,5 +92,9 @@ public class AvaliacaoFisicaService {
         dto.setHorarioAvaliacao(avaliacao.getHorarioAvaliacao());
         dto.setAvaliacaoFisica(avaliacao.getAvaliacaoFisica());
         return dto;
+    }
+
+    public AvaliacaoFisicaResponseDTO buscarAvaliacaoById(Long id) {
+        return mapToDTO(avaliacaoFisicaRepository.findById(id).get());
     }
 }

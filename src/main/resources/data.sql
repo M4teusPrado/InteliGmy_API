@@ -255,8 +255,52 @@ VALUES
     (9, '2023-11-15', '2023-11-15 18:45:00.000000');
 
 
+-- Exercícios para o Peito
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Supino Reto', 0);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Supino Inclinado', 0);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Flexão de Braço', 0);
 
+-- Exercícios para as Pernas
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Agachamento', 1);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Cadeira Extensora', 1);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Cadeira Flexora', 1);
 
+-- Exercícios para as Costas
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Barra Fixa', 2);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Puxada Alta', 2);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Remada', 2);
 
+-- Exercícios para os Ombros
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Desenvolvimento Ombro', 3);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Elevação Lateral', 3);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Encolhimento de Ombros', 3);
 
+-- Exercícios para os Braços
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca Direta', 4);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Tríceps Pulley', 4);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Bíceps Alternado', 4);
 
+-- Exercícios para o Abdômen
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Crunch', 5);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Prancha', 5);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Leg Raise', 5);
+
+-- Exercícios para os Bíceps
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca Alternada', 6);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Martelo', 6);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca 21', 6);
+
+-- Exercícios para os Tríceps
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Tríceps Francês', 7);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Tríceps Coice', 7);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Dips', 7);
+
+-- Exercícios para o Antebraço
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca de Punho', 8);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Flexão de Punho', 8);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Pronação e Supinação', 8);
+
+-- Exercícios de Cardio
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Esteira', 9);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Ciclismo', 9);
+INSERT INTO EXERCICIO (nome, tipo) VALUES ('Pular Corda', 9);

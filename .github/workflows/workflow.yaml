@@ -118,7 +118,10 @@ jobs:
           
       - name: Build and Push Container
         run: |-
-          docker build -t "us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" ./
+          
+          SPRING_PROFILES_ACTIVE=dev    
+          docker build -t "us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" \
+              --build-arg SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE} ./
           docker push "us.gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
 
       - name: Deploy to Cloud Run

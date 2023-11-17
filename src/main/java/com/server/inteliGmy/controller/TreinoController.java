@@ -1,5 +1,7 @@
 package com.server.inteliGmy.controller;
 
+import com.server.inteliGmy.DTOs.ExercicioDTO;
+import com.server.inteliGmy.DTOs.ExercicioDTOResponse;
 import com.server.inteliGmy.DTOs.TreinoDTO;
 import com.server.inteliGmy.DTOs.TreinoDTOResponse;
 import com.server.inteliGmy.service.TreinoService;
@@ -35,4 +37,15 @@ public class TreinoController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}/exercicio")
+    public ResponseEntity<Void> adicionarExercicio(@PathVariable Long id, @RequestBody ExercicioDTO dto) {
+        treinoService.adicionarExercicio(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/exercicios")
+    public ResponseEntity<List<ExercicioDTOResponse>> getExerciciosByTreino(@PathVariable Long id) {
+        List<ExercicioDTOResponse> dtos = treinoService.getExerciciosByTreino(id);
+        return ResponseEntity.ok().body(dtos);
+    }
 }

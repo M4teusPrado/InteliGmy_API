@@ -16,11 +16,17 @@ public class Aluno extends BaseUser {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gerencia_id")
     private Gerencia gerente;
+
     @Lob
     private byte[] imgProfile;
+
     @JsonIgnore()
     @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
     private List<Avaliacao> agendamentos;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "aluno")
+    private List<Treino> treinos;
 
     @Override
     public void setNivel(Nivel nivel) {
