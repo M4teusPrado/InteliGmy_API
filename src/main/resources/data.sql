@@ -24,11 +24,11 @@ VALUES
   ('bSc7d2IUT0eiZalN1PzA9RVEmSt1', 'Fernando Costa', 'fernando.costa@gmail.com', 1);
 
 -- INSERIR DADOS NA TABELA INSTRUTOR
-INSERT INTO INSTRUTOR (ID, HORARIO, SENHA_TEMPORARIA, GERENCIA_ID)
+INSERT INTO INSTRUTOR (ID, HORARIO, SENHA_TEMPORARIA, GERENCIA_ID, MEDIA_AVALIACAO)
 VALUES
-  (6, '09:00-11:00', 'Mateus!@#123',1),
-  (7, '14:00-16:00', 'Mateus!@#123',2),
-  (8, '11:00-13:00', 'Mateus!@#123',2);
+  (6, '09:00-11:00', 'Mateus!@#123',1, 4.0),
+  (7, '14:00-16:00', 'Mateus!@#123',2, 4.5),
+  (8, '11:00-13:00', 'Mateus!@#123',2, 3.75);
 
 -- INSERIR DADOS NA TABELA BASE_USER PARA O ALUNO
 INSERT INTO BASE_USER (UID, NOME, EMAIL, NIVEL)
@@ -46,14 +46,53 @@ VALUES
 INSERT INTO Feedback (INSTRUTOR_AVALIADO_ID, ALUNO_AVALIADOR_ID, CLASSIFICACAO, COMENTARIO, DATA_CRIACAO)
 VALUES
   (8, 9, 4.5, 'Ótimo instrutor!', '2023-10-25'),
-  (8, 10, 3.0, 'Bom trabalho, mas pode melhorar.', '2023-10-25');
+  (8, 10, 3.0, 'Bom trabalho, mas pode melhorar.', '2023-10-25'),
+  (7, 10, 5.0, 'Excelente abordagem e clareza nas explicações!', '2023-10-26'),
+  (7, 9, 4.5, 'Precisa melhorar na comunicação.', '2023-10-26'),
+  (6, 9, 4.0, 'Bom curso, aprendi muito.', '2023-10-27');
+
 
 -- INSERIR DADOS NA TABELA AVALIACAO
-INSERT INTO AVALIACAO (INSTRUTOR_ID, ALUNO_ID, DATA_AVALIACAO, HORARIO_AVALIACAO)
+INSERT INTO AVALIACAO_FISICA (ALTURA,
+                              PESO,
+                              IMC,
+                              GORDURA_CORPORAL,
+                              GORDURA_VISCERAL,
+                              ANTEBRACO_ESQUERDO,
+                              ANTEBRACO_DIREITO,
+                              BRACO_ESQUERDO,
+                              BRACO_DIREITO,
+                              COXA_ESQUERDA,
+                              COXA_DIREITA,
+                              PANTURRILHA_ESQUERDA,
+                              PANTURRILHA_DIREITA,
+                              CINTURA,
+                              ABDOMEN,
+                              QUADRIL)
+VALUES (1.75, -- ALTURA EM METROS
+        70.0, -- PESO EM QUILOS
+        22.86, -- IMC (ÍNDICE DE MASSA CORPORAL)
+        20.0, -- PERCENTUAL DE GORDURA CORPORAL
+        10.0, -- PERCENTUAL DE GORDURA VISCERAL
+        25.0, -- MEDIDA DO ANTEBRAÇO ESQUERDO EM CENTÍMETROS
+        25.5, -- MEDIDA DO ANTEBRAÇO DIREITO EM CENTÍMETROS
+        30.0, -- MEDIDA DO BRAÇO ESQUERDO EM CENTÍMETROS
+        30.5, -- MEDIDA DO BRAÇO DIREITO EM CENTÍMETROS
+        50.0, -- MEDIDA DA COXA ESQUERDA EM CENTÍMETROS
+        50.5, -- MEDIDA DA COXA DIREITA EM CENTÍMETROS
+        35.0, -- MEDIDA DA PANTURRILHA ESQUERDA EM CENTÍMETROS
+        35.5, -- MEDIDA DA PANTURRILHA DIREITA EM CENTÍMETROS
+        80.0, -- MEDIDA DA CINTURA EM CENTÍMETROS
+        85.0, -- MEDIDA DO ABDÔMEN EM CENTÍMETROS
+        90.0 -- MEDIDA DO QUADRIL EM CENTÍMETROS
+       );
+
+INSERT INTO AVALIACAO (INSTRUTOR_ID, ALUNO_ID, DATA_AVALIACAO, HORARIO_AVALIACAO, AVALIACAO_FISICA_ID)
 VALUES
-  (7, 9, '2023-10-25', '09:00:00'),
-  (7, 10, '2023-10-25', '10:00:00'),
-  (7, 10, '2023-11-01', '10:00:00');
+  (7, 9, '2023-10-25', '09:00:00',  1),
+  (7, 10, '2023-10-25', '10:00:00', null),
+  (7, 10, '2023-11-01', '10:00:00',null);
+
 
 -- INSERIR DADOS NA TABELA CHAMADO
 INSERT INTO CHAMADO (ALUNO_ID, STATUS_CHAMADOS, DATA_CRIACAO, HORARIO_CONCLUSAO, INSTRUTOR_ID)
@@ -255,52 +294,22 @@ VALUES
     (9, '2023-11-15', '2023-11-15 18:45:00.000000');
 
 
+-- TREINO PEITO
+INSERT INTO TREINO(NOME, OBJETIVO, ALUNO_ID, INSTRUTOR_ID, DATA_INICIO, DATA_FIM )
+VALUES
+('Peito', 'Aumentar peito',9, 7, null, null),
+('Perna', 'Fortalecer pernas', 9, 7, null, null),
+('Costa', 'Desenvolver músculos das costas', 9, 7, null, null);
+
 -- Exercícios para o Peito
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Supino Reto', 0);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Supino Inclinado', 0);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Flexão de Braço', 0);
-
--- Exercícios para as Pernas
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Agachamento', 1);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Cadeira Extensora', 1);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Cadeira Flexora', 1);
-
--- Exercícios para as Costas
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Barra Fixa', 2);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Puxada Alta', 2);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Remada', 2);
-
--- Exercícios para os Ombros
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Desenvolvimento Ombro', 3);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Elevação Lateral', 3);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Encolhimento de Ombros', 3);
-
--- Exercícios para os Braços
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca Direta', 4);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Tríceps Pulley', 4);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Bíceps Alternado', 4);
-
--- Exercícios para o Abdômen
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Crunch', 5);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Prancha', 5);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Leg Raise', 5);
-
--- Exercícios para os Bíceps
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca Alternada', 6);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Martelo', 6);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca 21', 6);
-
--- Exercícios para os Tríceps
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Tríceps Francês', 7);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Tríceps Coice', 7);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Dips', 7);
-
--- Exercícios para o Antebraço
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Rosca de Punho', 8);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Flexão de Punho', 8);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Pronação e Supinação', 8);
-
--- Exercícios de Cardio
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Esteira', 9);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Ciclismo', 9);
-INSERT INTO EXERCICIO (nome, tipo) VALUES ('Pular Corda', 9);
+INSERT INTO EXERCICIO (NOME, TIPO, TREINO_ID, PESO, REPETICOES, SERIES)
+VALUES
+    ('Supino Reto',         0,  1,   30,   3,   12  ),
+    ('Supino Inclinado',    0,  1,   35,   4,   10  ),
+    ('Flexão de Braço',     0,  1,   10,   3,   8   ),
+    ('Agachamento',         1,  2,   80,   4,   10  ),
+    ('Cadeira Extensora',   1,  2,   50,   4,   10  ),
+    ('Cadeira Flexora',     1,  2,   30,   3,   12  ),
+    ('Barra Fixa',          2,  3,   30,   3,   10  ),
+    ('Puxada Alta',         2,  3,   20,   5,   8   ),
+    ('Remada',              2,  3,   40,   5,   11  );
